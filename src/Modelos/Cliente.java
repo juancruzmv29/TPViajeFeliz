@@ -1,5 +1,6 @@
 package Modelos;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Cliente {
@@ -8,7 +9,9 @@ public class Cliente {
 	private String nombre;
 	private String direccion;
 	private static Integer codigoUnico = 0;
-	ArrayList<Servicio> servicios;
+	ArrayList<ServicioSimple> serviciosSimples;
+	ArrayList<Paquete> paquetes;
+	ArrayList<Servicio> paquetesDePaquetes;  // ver si eliminar o no
 	
 	
 	public Cliente(String dni, String nombre, String direccion) {
@@ -19,7 +22,8 @@ public class Cliente {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.codigoUnico++;
-		this.servicios = new ArrayList<>();
+		this.serviciosSimples = new ArrayList<>();
+		this.paquetes = new ArrayList<>();
 	}
 
 
@@ -53,13 +57,13 @@ public class Cliente {
 	}
 
 
-	public ArrayList<Servicio> getServicios() {
-		return servicios;
+	public ArrayList<ServicioSimple> getServicios() {
+		return serviciosSimples;
 	}
 
 
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
+	public void setServicios(ArrayList<ServicioSimple> serviciosSimples) {
+		this.serviciosSimples = serviciosSimples;
 	}
 	
 	
@@ -77,6 +81,16 @@ public class Cliente {
 	//=================================================================== FUNCIONES PARA HACER
 	public void aplicarDescuento() {
 		
+	}
+	
+	
+	public void crearPaquete(String tipoPaquete, LocalDate fechaInicio) {
+		Paquete paquete = new Paquete(tipoPaquete, fechaInicio);
+		paquetes.add(paquete);
+	}
+	
+	public void agregarServicioAPaquete(int codigoPaquete, ServicioSimple servicioSimple) {
+		// si el paquete no fue pagado y no paso la fecha de inicio podemos agregar servicio al paquete
 	}
 	
 	
